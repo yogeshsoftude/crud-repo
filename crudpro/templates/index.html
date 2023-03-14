@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="row">
+
+        <h1 class="text-center alert-danger">Students Info</h1>
+        <div class=" col-sm-3">
+            <h4 class="text-center alert alert-info">Enter Students Details</h4>
+
+
+            <form method="POST">
+                {% csrf_token %}
+                <div>
+                    <label>Name</label>
+                    <input class="form-control " type="text " name="name" required="" value="{{stu.name}}"><br>
+
+                </div>
+                <div>
+                    <label>Surname</label>
+                    <input class="form-control " type="text " name="surname" required="" value="{{stu.surname}}"><br>
+
+                </div>
+                <div>
+                    <label>Gender</label>
+                    <input class="form-control " type="text " name="gender" required="" value="{{stu.gender}}"><br>
+
+                </div>
+
+                <div>
+                    <label>age</label> <input class="form-control " type="text" required="" name="age" value="{{stu.age}}"><br>
+                </div>
+                <div>
+                    <label>Contact</label>
+                    <input class="form-control " type="text " name="contact" required="" value="{{stu.contact}}"><br><br>
+
+                </div>
+
+                <div>
+                    <label>address</label>
+                    <input class="form-control " type="text " name="address" required="" value="{{stu.address}}"><br>
+
+                </div>
+
+                <button type="submit" class="btn btn-success">Submit</button>
+                <a href="{% url 'index' %} " class="btn btn-primary " type="button">show data</a>
+
+
+
+            </form>
+        </div>
+        <div class="col-sm-9">
+            <h4 class="text-center alert alert-info">Students Info</h4>
+
+            <a href="{% url 'index' %}" class="btn btn-success" type='button'>Add User +</a>
+            <a href="{% url 'logout' %}" class="btn btn-success" type='button'>Logout</a> {% if students %}
+            <table class="table table-danger">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NAME</th>
+                        <!-- <th>SURNAME</th> -->
+                        <!-- <th>GENDER</th>
+                        <th>AGE</th>
+                        <th>CONTECT</th>
+                        <th>ADDRESS</th> -->
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                {% for student in students %}
+                <tr>
+                    <td>{{student.id}}</td>
+                    <td>{{student.name}}</td>
+                    <!-- <td>{{student.surname}}</td> -->
+                    <!-- <td>{{student.gender}}</td>
+                    <td>{{student.age}}</td>
+                    <td>{{student.contact}}</td>
+                    <td>{{student.address}}</td> -->
+
+                    <td>
+                        <a href="{% url 'Student_info' student.id %}" class="btn btn-primary" type='button'>info</a>
+                        <a href="{% url 'Student_update' student.id %}" class="btn btn-success" type='button'>update</a>
+                        <a href="{% url 'Student_delete' student.id %}" class="btn btn-danger" type='button'>delete</a>
+
+                    </td>
+                    {% endfor %} {% endif%}
+
+                </tr>
+            </table>
+
+
+        </div>
+    </div>
+
+</body>
+
+</html>
