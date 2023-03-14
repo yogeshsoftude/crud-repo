@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate,login,logout
 
 
 
-# Create your views here.
+# Create your views here .  
 def logout(request):
     auth.logout(request)
     return redirect('home')
